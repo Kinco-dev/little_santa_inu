@@ -198,12 +198,12 @@ contract Little_Santa_Inu is Context, IERC20, Ownable {
     uint256 private _rTotal = (MAX - (MAX % _tTotal));
 
     address public liquidityWallet;
-    address payable public marketingWallet = payable(0x7F264efA5aDFc26126ae93B4327BEAacCa0a25c2); // TODO
+    address payable public marketingWallet = payable(0xf770f3f0f39bA181db835197fCffB8825299A270);
 
     uint256 private _tFeeTotal;
 
-    string private _name = "Todo Todo"; // Little Santa inu
-    string private _symbol = "TODO"; // LSI
+    string private _name = "Little Santa inu";
+    string private _symbol = "LSI";
     uint8 private _decimals = 18;
 
     address constant private  DEAD = 0x000000000000000000000000000000000000dEaD;
@@ -229,7 +229,7 @@ contract Little_Santa_Inu is Context, IERC20, Ownable {
     
     bool private _inSwapAndLiquify;
     
-    uint256 public maxSellLimitAmount = 1_000_000_000 *10**18; //1MM => 1% !
+    uint256 public maxSellLimitAmount = 1_000_000_000 *10**18;
     uint256 public swapThreshold =  10_000_000* 10**18; //10M => 0.01%
 
     // all known liquidity pools 
@@ -289,7 +289,7 @@ contract Little_Santa_Inu is Context, IERC20, Ownable {
     constructor ()  {
         _rOwned[_msgSender()] = _rTotal;
         
-        dexRouter = IRouter02(0x9Ac64Cc6e4415144C455BD8E4837Fea55603e5c3);//0x10ED43C718714eb63d5aA57B78B54704E256024E); // TODO
+        dexRouter = IRouter02(0x10ED43C718714eb63d5aA57B78B54704E256024E);
          // Create a uniswap pair for this new token with BNB
         dexPair = IFactory02(dexRouter.factory())
             .createPair(address(this), dexRouter.WETH());
@@ -527,7 +527,7 @@ contract Little_Santa_Inu is Context, IERC20, Ownable {
     }
 
     function _calculateFees(uint256 amount) private view returns (uint256,uint256,uint256) {
-            return(amount*ratios.rewards/ratios.total/100,amount*ratios.lp/ratios.total/100,amount*ratios.marketing/ratios.total/100);
+            return(amount*ratios.rewards/ratios.total/100*totalFees,amount*ratios.lp/ratios.total/100*totalFees,amount*ratios.marketing/ratios.total/100*totalFees);
         
     }
     
