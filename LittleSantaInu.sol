@@ -472,7 +472,7 @@ contract Little_Santa_Inu is Context, IERC20, Ownable {
     }
     
     function setSwapThreshold(uint256 amount) external onlyOwner {
-        require(amount >= 1 && amount <= 1_000_000_000, "BABY COOKIE: Amount must be bewteen 1 and 1 000 000 000");
+        require(amount >= 1 && amount <= 1_000_000_000, "LSI: Amount must be bewteen 1 and 1 000 000 000");
         swapThreshold = amount *10**18;
         emit SwapThresholdUpdated(amount);
 
